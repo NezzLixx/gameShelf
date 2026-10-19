@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Каталог</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="index.html">Ігрова полиця</a>
+  <nav>
+    <a href="index.html" aria-current="page">Каталог</a>
+    <a href="library.html">Бібліотека <span id="lib-count" class="count"></span></a>
+    <a href="stats.html">Статистика</a>
+  </nav>
+</header>
+
+<main>
+<h1>Каталог ігор</h1>
+
+<form class="filters" id="filters">
+  <label class="field grow">Пошук<input type="search" id="search" placeholder="Назва гри"></label>
+  <button type="submit" class="btn">Шукати</button>
+
+  <label class="field">Жанр<select id="genre"><option value="">Усі жанри</option></select></label>
+
+  <label class="field">Платформа
+    <select id="platform">
+      <option value="">Усі платформи</option>
+      <option value="1">ПК</option>
+      <option value="2">PlayStation</option>
+      <option value="3">Xbox</option>
+      <option value="7">Nintendo</option>
+    </select>
+  </label>
+
+  <label class="field">Сортування
+    <select id="ordering">
+      <option value="-added">Найпопулярніші</option>
+      <option value="-rating">За рейтингом</option>
+      <option value="-released">Новіші спершу</option>
+      <option value="name">За назвою</option>
+      <option value="-metacritic">За Metacritic</option>
+    </select>
+  </label>
+</form>
+
+<p id="status" class="status"></p>
+<div id="grid" class="grid"></div>
+<nav id="pagination" class="pagination"></nav>
+  <p class="status">Дані про ігри надає <a href="https://rawg.io" target="_blank">RAWG</a></p>
+</main>
+
+<script src="js/common.js"></script>
+<script src="js/catalog.js"></script>
+</body>
+</html>

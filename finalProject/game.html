@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Гра</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="index.html">Ігрова полиця</a>
+  <nav>
+    <a href="index.html">Каталог</a>
+    <a href="library.html">Бібліотека <span id="lib-count" class="count"></span></a>
+    <a href="stats.html">Статистика</a>
+  </nav>
+</header>
+
+<main>
+<a class="back" href="index.html">Назад до каталогу</a>
+<div id="game" class="game"><p class="status">Завантаження…</p></div>
+  <p class="status">Дані про ігри надає <a href="https://rawg.io" target="_blank">RAWG</a></p>
+</main>
+
+<script src="js/common.js"></script>
+<script src="js/game.js"></script>
+</body>
+</html>

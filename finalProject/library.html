@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<title>Бібліотека</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;700&family=Unbounded:wght@500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<header class="site-header">
+  <a class="logo" href="index.html">Ігрова полиця</a>
+  <nav>
+    <a href="index.html">Каталог</a>
+    <a href="library.html" aria-current="page">Бібліотека <span id="lib-count" class="count"></span></a>
+    <a href="stats.html">Статистика</a>
+  </nav>
+</header>
+
+<main>
+<h1>Моя бібліотека</h1>
+
+<form class="filters" id="filters">
+  <label class="field grow">Пошук<input type="search" id="search" placeholder="Назва гри"></label>
+
+  <label class="field">Статус
+    <select id="status-filter">
+      <option value="all">Усі</option>
+      <option value="want">Хочу пройти</option>
+      <option value="playing">Граю</option>
+      <option value="done">Пройдено</option>
+    </select>
+  </label>
+
+  <label class="field">Сортування
+    <select id="sort">
+      <option value="added">Спершу нові</option>
+      <option value="name">За назвою</option>
+      <option value="rating">За рейтингом</option>
+    </select>
+  </label>
+</form>
+
+<p id="status" class="status"></p>
+<div id="grid" class="grid"></div>
+  <p class="status">Дані про ігри надає <a href="https://rawg.io" target="_blank">RAWG</a></p>
+</main>
+
+<script src="js/common.js"></script>
+<script src="js/library.js"></script>
+</body>
+</html>
