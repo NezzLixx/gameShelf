@@ -1,6 +1,6 @@
 const API_KEY = "";
 const BASE_URL = "https://api.rawg.io/api";
-const PAGE_SIZE = 16;
+const PAGE_SIZE = 18;
 const STATUSES = {
   want: "Хочу пройти",
   playing: "Граю",
@@ -42,6 +42,14 @@ function getScreenshots(id) {
 
 function getGenres() {
   return loadFromApi("/genres");
+}
+
+function getGamesByDeveloper(developerId) {
+  return loadFromApi("/games", {
+    developers: developerId,
+    page_size: 5,
+    ordering: "-added"
+  });
 }
 
 

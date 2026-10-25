@@ -15,6 +15,44 @@ function namesToText(items) {
   return names.join(", ");
 }
 
+function similarCardHTML(game) {
+  const year = game.released ? game.released.slice(0, 4) : "Дата невідома";
+  return `<article class="card">
+    ${coverHTML(game)}
+    <div class="card-body">
+      <h2><a href="game.html?id=${game.id}">${game.name}</a></h2>
+      <p class="meta">${year}</p>
+    </div>
+  </article>`;
+}
+
+
+async function loadSimilar(game) {
+  const box = document.getElementById("similar");
+
+  if (!game.developers || game.developers.length === 0) {
+    box.innerHTML = "<p class='meta'>Розробника не вказано.</p>";
+    return;
+  }
+
+  try {
+    const data = await getGamesByDeveloper(game.developers[0].id);
+
+    let html = "";
+    let count = 0;
+    for (let i = 0; i < data.results.length && count < 4; i++) {
+      const other = makeEntry(data.results[i]);
+      if (other.id !== game.id) {
+        html += similarCardHTML(other);
+        count++;
+      }
+    }
+
+    box.innerHTML = html || "<p class='meta'>Інших ігор цього розробника не знайдено.</p>";
+  } catch (error) {
+    box.innerHTML = "<p class='meta'>Не вдалося завантажити інші ігри від цього розробника.</p>";
+  }
+}
 
 function showGame(game, screenshots) {
   document.title = game.name;
@@ -78,11 +116,16 @@ function showGame(game, screenshots) {
         <dt>Сайт</dt><dd>${site}</dd>
       </dl>
     </section>
-    ${shotsHTML}`;
+    ${shotsHTML}
+    <section>
+      <h2>Ігри від цього розробника</h2>
+      <div class="grid" id="similar"><p class="meta">Завантаження…</p></div>
+    </section>`;
 
   document.getElementById("desc").textContent = game.description_raw || "Опис відсутній.";
 
   setButton(document.getElementById("add-btn"), isInLibrary(currentEntry.id));
+  loadSimilar(game);
 }
 
 
@@ -90,7 +133,6 @@ function onAddClick() {
   toggleInLibrary(currentEntry);
   setButton(document.getElementById("add-btn"), isInLibrary(currentEntry.id));
 }
-
 
 async function loadGame() {
   if (!gameId) {

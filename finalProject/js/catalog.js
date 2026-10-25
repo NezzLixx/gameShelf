@@ -5,6 +5,7 @@ const searchInput = document.getElementById("search");
 const genreSelect = document.getElementById("genre");
 const platformSelect = document.getElementById("platform");
 const orderingSelect = document.getElementById("ordering");
+const categoriesBox = document.getElementById("categories");
 
 let currentPage = 1;
 let games = [];
@@ -30,9 +31,28 @@ function cardHTML(game) {
   </article>`;
 }
 
+function skeletonHTML() {
+  let html = "";
+
+  for (let i = 0; i < PAGE_SIZE; i++) {
+    html += `<article class="card">
+      <div class="cover skeleton"></div>
+      <div class="card-body">
+        <div class="skeleton skeleton-line"></div>
+        <div class="skeleton skeleton-line short"></div>
+        <div class="skeleton skeleton-line short"></div>
+        <div class="skeleton skeleton-btn"></div>
+      </div>
+    </article>`;
+  }
+
+  return html;
+}
 
 async function loadGames() {
   statusText.textContent = "Завантаження…";
+  grid.innerHTML = skeletonHTML();
+  pagination.innerHTML = "";
 
   try {
     const data = await getGames({
@@ -96,9 +116,9 @@ function goToPage(page) {
 
 function applyFilters() {
   currentPage = 1;
+  markActiveCategory();
   loadGames();
 }
-
 
 function onAddClick(id) {
   for (let i = 0; i < games.length; i++) {
@@ -109,16 +129,44 @@ function onAddClick(id) {
   }
 }
 
+function categoryHTML(slug, name) {
+  return `<li><button type="button" class="category" data-slug="${slug}"
+    onclick="selectCategory('${slug}')">${name}</button></li>`;
+}
+
+function selectCategory(slug) {
+  genreSelect.value = slug;
+  applyFilters();
+}
+
+function markActiveCategory() {
+  const buttons = categoriesBox.querySelectorAll(".category");
+  for (let i = 0; i < buttons.length; i++) {
+    if (buttons[i].dataset.slug === genreSelect.value) {
+      buttons[i].classList.add("active");
+    } else {
+      buttons[i].classList.remove("active");
+    }
+  }
+}
 
 async function loadGenres() {
   try {
     const data = await getGenres();
+
+    let categoriesHTML = categoryHTML("", "Усі ігри");
+
     for (let i = 0; i < data.results.length; i++) {
       const genre = data.results[i];
       genreSelect.add(new Option(genre.name, genre.slug));
+      categoriesHTML += categoryHTML(genre.slug, genre.name);
     }
+
+    categoriesBox.innerHTML = categoriesHTML;
+    markActiveCategory();
   } catch (error) {
     console.log("Не вдалося завантажити жанри", error);
+    categoriesBox.innerHTML = "<li class='meta'>Не вдалося завантажити категорії</li>";
   }
 }
 

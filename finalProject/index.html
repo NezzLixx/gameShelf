@@ -20,39 +20,74 @@
 </header>
 
 <main>
-<h1>Каталог ігор</h1>
+  <section class="hero">
+    <h1>Ігрова полиця</h1>
+    <p>Знаходьте відеоігри, дивіться повну інформацію про них і збирайте власну
+      бібліотеку: позначайте, у що граєте, що вже пройшли і що хочете пройти.</p>
+    <a class="btn" href="library.html">Моя бібліотека</a>
+  </section>
 
-<form class="filters" id="filters">
-  <label class="field grow">Пошук<input type="search" id="search" placeholder="Назва гри"></label>
-  <button type="submit" class="btn">Шукати</button>
+  <section class="steps">
+    <div class="step">
+      <h3>1. Знайдіть гру</h3>
+      <p>Скористайтеся пошуком, фільтрами або категоріями в боковому меню.</p>
+    </div>
+    <div class="step">
+      <h3>2. Додайте в бібліотеку</h3>
+      <p>Натисніть кнопку на картці, і гра збережеться у вашій бібліотеці.</p>
+    </div>
+    <div class="step">
+      <h3>3. Слідкуйте за прогресом</h3>
+      <p>Змінюйте статус гри та дивіться свою статистику на окремій сторінці.</p>
+    </div>
+  </section>
 
-  <label class="field">Жанр<select id="genre"><option value="">Усі жанри</option></select></label>
+  <h2 class="catalog-title">Каталог ігор</h2>
 
-  <label class="field">Платформа
-    <select id="platform">
-      <option value="">Усі платформи</option>
-      <option value="1">ПК</option>
-      <option value="2">PlayStation</option>
-      <option value="3">Xbox</option>
-      <option value="7">Nintendo</option>
-    </select>
-  </label>
+  <div class="layout">
 
-  <label class="field">Сортування
-    <select id="ordering">
-      <option value="-added">Найпопулярніші</option>
-      <option value="-rating">За рейтингом</option>
-      <option value="-released">Новіші спершу</option>
-      <option value="name">За назвою</option>
-      <option value="-metacritic">За Metacritic</option>
-    </select>
-  </label>
-</form>
+    <aside class="sidebar">
+      <h2>Категорії</h2>
+      <ul id="categories" class="categories">
+        <li class="meta">Завантаження…</li>
+      </ul>
+    </aside>
 
-<p id="status" class="status"></p>
-<div id="grid" class="grid"></div>
-<nav id="pagination" class="pagination"></nav>
-  <p class="status">Дані про ігри надає <a href="https://rawg.io" target="_blank">RAWG</a></p>
+    <div class="content">
+      <form class="filters" id="filters">
+        <label class="field grow">Пошук<input type="search" id="search" placeholder="Назва гри"></label>
+        <button type="submit" class="btn">Шукати</button>
+
+        <label class="field">Жанр<select id="genre"><option value="">Усі жанри</option></select></label>
+
+        <label class="field">Платформа
+          <select id="platform">
+            <option value="">Усі платформи</option>
+            <option value="1">ПК</option>
+            <option value="2">PlayStation</option>
+            <option value="3">Xbox</option>
+            <option value="7">Nintendo</option>
+          </select>
+        </label>
+
+        <label class="field">Сортування
+          <select id="ordering">
+            <option value="-added">Найпопулярніші</option>
+            <option value="-rating">За рейтингом</option>
+            <option value="-released">Новіші спершу</option>
+            <option value="name">За назвою</option>
+            <option value="-metacritic">За Metacritic</option>
+          </select>
+        </label>
+      </form>
+
+      <p id="status" class="status"></p>
+      <div id="grid" class="grid"></div>
+      <nav id="pagination" class="pagination"></nav>
+      <p class="status">Дані про ігри надає <a href="https://rawg.io" target="_blank">RAWG</a></p>
+    </div>
+
+  </div>
 </main>
 
 <script src="js/common.js"></script>
